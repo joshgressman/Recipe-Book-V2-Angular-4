@@ -10,7 +10,7 @@ import { Ingredient } from '../../../shared/ingredient.model';
 })
 export class RecipeItemComponent implements OnInit {
    @Input() recipe: Recipe;
-
+   @Input() index: number;
 
 
 
