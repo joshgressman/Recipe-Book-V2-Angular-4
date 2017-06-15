@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, Output, OnDestroy } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import {  ShoppingListService } from './shopping-list.service';
+
 
 @Component({
   selector: 'app-shopping-list',
@@ -8,20 +10,25 @@ import {  ShoppingListService } from './shopping-list.service';
   styleUrls: ['./shopping-list.component.css']
 
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[];
+  private subscription: Subscription;
 
   constructor(private shoppingListService: ShoppingListService) { }
 
 
   ngOnInit() {
   this.ingredients = this.shoppingListService.getIngredients();
-  this.shoppingListService.ingredientsChanged
+  this.subscription = this.shoppingListService.ingredientsChanged
   .subscribe(
     (ingredients: Ingredient[]) => {
       this.ingredients = ingredients
     } //listens from the Eventemiter when the ingredients is updated
   );
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 
