@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>() //listens for when the event changes
+  startedEditing = new Subject<number>();
   private ingredients: Ingredient[] = [                 //this is how the sliced() array copy gets updated
     new Ingredient('Chickern', 5),
     new Ingredient('olive oil', 1),
