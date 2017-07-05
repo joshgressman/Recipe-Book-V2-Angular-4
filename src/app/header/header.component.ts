@@ -22,4 +22,13 @@ export class HeaderComponent {
    );
   }
 
+  onGetRecipes(){
+    this.dataStorageService.getRecipes()
+    .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );
+  }
+
 }
