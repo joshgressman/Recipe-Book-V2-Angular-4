@@ -3,21 +3,25 @@ import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/RX';
 import { Observable } from 'rxjs/Observable';
 import { RecipeService } from '../recipes/recipe.service';
+import { AuthService } from '../auth/auth.service';
 import { Recipe } from '../recipes/recipe.model';
 
 @Injectable()
 export class DataStorageService {
 
- constructor(private http: Http, private recipesService: RecipeService){}
+ constructor(private http: Http, private recipesService: RecipeService, private authService: AuthService){}
 
  // ADD / OVERIDE DATA IN FIREBASE
  storeRecipes() {
-  return this.http.put('https://ng-recipe-book-a78ad.firebaseio.com/recipes.json', this.recipesService.getRecipes());
+   const token = this.authService.getToken()
+  return this.http.put('https://ng-recipe-book-a78ad.firebaseio.com/recipes.json?auth=' + token, this.recipesService.getRecipes());
  }
 
  //GET RECIPES
  getRecipes(){
- return this.http.get('https://ng-recipe-book-a78ad.firebaseio.com/recipes.json')
+   const token = this.authService.getToken()
+
+  this.http.get('https://ng-recipe-book-a78ad.firebaseio.com/recipes.json?auth=' + token)
  .map(
    (response: Response) =>{
     const recipes: Recipe[] = response.json();
@@ -38,4 +42,7 @@ export class DataStorageService {
  );
 }
 
+
+//Adding Auth / protected routes to the
+//Auth routes via the token from firebase
 }
