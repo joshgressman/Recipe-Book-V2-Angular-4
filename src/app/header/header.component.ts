@@ -22,13 +22,9 @@ export class HeaderComponent {
    );
   }
 
+  //Observable was subscribed to in the data-storage service
   onGetRecipes(){
-    this.dataStorageService.getRecipes()
-    .subscribe(
-      (response: Response) => {
-        console.log(response);
-      }
-    );
+    this.dataStorageService.getRecipes();
   }
 
 }
