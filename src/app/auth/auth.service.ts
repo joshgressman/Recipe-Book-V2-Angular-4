@@ -4,9 +4,9 @@ import * as firebase from 'firebase';
 
 @Injectable()
 export class AuthService {
-   token: string;
+   public token: string;
 
-   constructor(private router: Router){}
+   constructor(public router: Router){}
   //firebase has built in helper methods used below.
 
   signupUser(email: string, password: string){

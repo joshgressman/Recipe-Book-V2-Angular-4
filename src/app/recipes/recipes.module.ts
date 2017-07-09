@@ -20,7 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     RecipeDetailComponent,
     RecipeItemComponent
   ],
-  imports: [ CommonModule, ReactiveFormsModule, RecipesRoutingModule, SharedModule ]
+  imports: [ CommonModule, ReactiveFormsModule, RecipesRoutingModule, SharedModule],
 })
 export class RecipesModule {
 
